@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Menu for website</title>
+	<style>
+		nav{
+			position: relative;
+			width: 900px;
+			height: 100px;
+			border: 1px solid #999;
+		}
+		#myCanvas{
+			background-color: #333;
+		}
+		ul{
+			display: block;
+			position: absolute;
+			top: 10px;
+		}
+		li{
+			float: left;
+			list-style-type: none;
+		}
+		a{
+			display: block;
+			padding: 10px 26px;
+			text-decoration: none;
+			font-size: 24px;
+			color: #333;
+		}
+	</style>
+</head>
+<body>
+	
+	<nav id="MxNav">
+		<canvas id="myCanvas"></canvas>
+		<ul>
+			<li>
+				<a href="#">ГЛАВНАЯ</a>
+			</li>
+			<li>
+				<a href="#">О НАС</a>
+			</li>
+			<li>
+				<a href="#">НОВОСТИ</a>
+			</li>
+			<li>
+				<a href="#">КОНТАКТЫ</a>
+			</li>
+			<li>
+				<a href="#">ПАРТНЕРЫ</a>
+			</li>
+		</ul>
+	</nav>	
+	
+	<script>
+
+		var navBlock = document.getElementById( 'MxNav' );
+		var navW = navBlock.offsetWidth;
+		var navH = navBlock.offsetHeight;
+
+		var myCanvas = document.getElementById( 'myCanvas' );
+		myCanvas.setAttribute( 'width', navW );
+		myCanvas.setAttribute( 'height', navH );
+
+		var c = myCanvas.getContext( '2d' );
+
+		navBlock.onmousemove = function(){
+			c.clearRect( 0, 0, myCanvas.width, myCanvas.height );
+			var posMouseX = event.clientX;
+			var posMouseY = event.clientY;
+			x = posMouseX - 100;
+			y = posMouseY - 100;
+
+			var grd = c.createRadialGradient( 100 + x, 100 + y, 100, 100 + x, 100 + y, 0 );
+			grd.addColorStop( 1, '#fff' );
+			grd.addColorStop( 0, '#333' );
+			c.fillStyle = grd;
+			c.fillRect( x, y, 200, 200 );
+		}
+		navBlock.onmouseout = function(){
+			c.clearRect( 0, 0, myCanvas.width, myCanvas.height );
+		}
+
+	</script>
+</body>
+</html>
